@@ -41,6 +41,10 @@
 			
 			padding: 24px !important;
 			
+			@include media-max-width(400px) {
+				padding: 24px 12px !important;
+			}
+			
 			@include media-max-width(740px) {
 				grid-template-columns: 1fr;
 				grid-template-rows: auto 196px auto;
