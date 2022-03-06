@@ -10,6 +10,7 @@ export interface ImageObject {
 export interface GalleryObject {
 	id: number,
 	title: string,
+	description: description,
 	subtitle: string,
 	color: string,
 	images: Array<{

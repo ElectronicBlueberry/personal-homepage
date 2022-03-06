@@ -4,6 +4,7 @@ export interface ProjectObject {
 	color: string,
 	featured_image?: string,
 	abstract?: string,
+	description?: string,
 	article?: Array<{
 		text: string
 	}>

@@ -81,7 +81,7 @@ collections:
       sql: >-
         CREATE TABLE "galleries" (`id` integer PRIMARY KEY AUTOINCREMENT NOT
         NULL, `title` varchar(255) NULL, `subtitle` varchar(255) NULL, `color`
-        varchar(255) null default null)
+        varchar(255) null default null, `description` text null)
   - collection: galleries_files
     meta:
       collection: galleries_files
@@ -136,7 +136,7 @@ collections:
       name: gallery_page
       sql: >-
         CREATE TABLE `gallery_page` (`id` integer not null primary key
-        autoincrement)
+        autoincrement, `description` text null)
   - collection: gallery_page_galleries
     meta:
       collection: gallery_page_galleries
@@ -192,7 +192,8 @@ collections:
       sql: >-
         CREATE TABLE "homepage_content" (`id` integer PRIMARY KEY AUTOINCREMENT
         NOT NULL, `about_me_content` text NULL, `featured_gallery` integer NULL,
-        CONSTRAINT `homepage_content_featured_gallery_foreign` FOREIGN KEY
+        `description` text null, CONSTRAINT
+        `homepage_content_featured_gallery_foreign` FOREIGN KEY
         (`featured_gallery`) REFERENCES `galleries` (`id`) ON DELETE SET NULL)
   - collection: homepage_content_projects
     meta:
@@ -281,9 +282,10 @@ collections:
       sql: >-
         CREATE TABLE "projects" (`id` integer PRIMARY KEY AUTOINCREMENT NOT
         NULL, `title` varchar(255) NULL, `abstract` text NULL, `featured_image`
-        char(36) NULL, `color` varchar(255) NULL, CONSTRAINT
-        `projects_featured_image_foreign` FOREIGN KEY (`featured_image`)
-        REFERENCES `directus_files` (`id`) ON DELETE SET NULL)
+        char(36) NULL, `color` varchar(255) NULL, `description` text null,
+        CONSTRAINT `projects_featured_image_foreign` FOREIGN KEY
+        (`featured_image`) REFERENCES `directus_files` (`id`) ON DELETE SET
+        NULL)
   - collection: projects_page
     meta:
       collection: projects_page
@@ -308,7 +310,7 @@ collections:
       name: projects_page
       sql: >-
         CREATE TABLE `projects_page` (`id` integer not null primary key
-        autoincrement, `text` text null)
+        autoincrement, `text` text null, `description` text null)
   - collection: projects_page_projects
     meta:
       collection: projects_page_projects
@@ -532,6 +534,42 @@ fields:
       display_options: null
       readonly: false
       hidden: false
+      sort: 5
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries
+    field: description
+    type: text
+    schema:
+      name: description
+      table: galleries
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries
+      field: description
+      special: null
+      interface: input-multiline
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
       sort: 4
       width: full
       translations: null
@@ -712,7 +750,43 @@ fields:
       display_options: null
       readonly: true
       hidden: true
-      sort: null
+      sort: 1
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page
+    field: description
+    type: text
+    schema:
+      name: description
+      table: gallery_page
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: gallery_page
+      field: description
+      special: null
+      interface: input-multiline
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 2
       width: full
       translations: null
       note: null
@@ -1398,7 +1472,7 @@ fields:
       display_options: null
       readonly: true
       hidden: true
-      sort: null
+      sort: 1
       width: full
       translations: null
       note: null
@@ -1435,7 +1509,7 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: null
+      sort: 2
       width: full
       translations: null
       note: null
@@ -1473,7 +1547,43 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: null
+      sort: 6
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content
+    field: description
+    type: text
+    schema:
+      name: description
+      table: homepage_content
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content
+      field: description
+      special: null
+      interface: input-multiline
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
       width: full
       translations: null
       note: null
@@ -1726,6 +1836,42 @@ fields:
       readonly: false
       hidden: false
       sort: 2
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page
+    field: description
+    type: text
+    schema:
+      name: description
+      table: projects_page
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects_page
+      field: description
+      special: null
+      interface: input-multiline
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
       width: full
       translations: null
       note: null
@@ -2059,6 +2205,42 @@ fields:
       conditions: null
       required: false
       group: null
+  - collection: projects
+    field: description
+    type: text
+    schema:
+      name: description
+      table: projects
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects
+      field: description
+      special: null
+      interface: input-multiline
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
   - collection: sections
     field: id
     type: integer
@@ -2185,7 +2367,7 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: 5
+      sort: 6
       width: full
       translations: null
       note: null
@@ -2208,7 +2390,7 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: null
+      sort: 3
       width: full
       translations: null
       note: null
@@ -2254,7 +2436,7 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: null
+      sort: 4
       width: full
       translations: null
       note: null
@@ -2277,7 +2459,7 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: null
+      sort: 5
       width: full
       translations: null
       note: null
@@ -2300,7 +2482,7 @@ fields:
       display_options: null
       readonly: false
       hidden: false
-      sort: 3
+      sort: 4
       width: full
       translations: null
       note: null

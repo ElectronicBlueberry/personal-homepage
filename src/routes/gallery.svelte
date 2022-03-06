@@ -10,7 +10,8 @@
 		
 		return {
 			props: {
-				galleries: content?.galleries
+				galleries: content?.galleries,
+				description: content?.description
 			}
 		};
 	}
@@ -23,7 +24,15 @@
 	import GallerySvg from "$svg/gallery.svg"
 	
 	export let galleries: {galleries_id: GalleryObject}[];
+	export let description: string;
 </script>
+
+<svelte:head>
+	<title>
+		Gallery - Laila Los
+	</title>
+	<meta name="description" content={ description }>
+</svelte:head>
 
 <Heading color="var(--color-bright)"> <GallerySvg /> </Heading>
 

@@ -4,7 +4,7 @@
 	
 	export const load: Load = async({ fetch, params }) => {
 		const projectId = params.id;
-		const url = `${ import.meta.env.VITE_DIRECTUS_URL }/items/projects/${ projectId }?fields[]=id,title,article.text,color`;
+		const url = `${ import.meta.env.VITE_DIRECTUS_URL }/items/projects/${ projectId }?fields[]=id,title,article.text,color,description`;
 		
 		const res = await fetch(url);
 		const project = res.ok && (await res.json()).data;
@@ -24,6 +24,13 @@
 	
 	export let project: ProjectObject;
 </script>
+
+<svelte:head>
+	<title>
+		{ project.title } - Laila Los
+	</title>
+	<meta name="description" content={ project.description }>
+</svelte:head>
 
 <a href="/projects" class="projects-link">
 	<Heading color="var(--color-bright)"><Projects /></Heading>

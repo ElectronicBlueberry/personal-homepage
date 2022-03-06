@@ -14,7 +14,8 @@
 		return {
 			props: {
 				text: content?.text,
-				projects: content?.projects.map(p => p.projects_id)
+				projects: content?.projects.map(p => p.projects_id),
+				description: content?.description
 			}
 		};
 	}
@@ -27,7 +28,15 @@
 	
 	export let text: string;
 	export let projects: ProjectObject[];
+	export let description: string;
 </script>
+
+<svelte:head>
+	<title>
+		Projects - Laila Los
+	</title>
+	<meta name="description" content={ description }>
+</svelte:head>
 
 <Heading color="var(--color-bright)"><Projects /></Heading>
 

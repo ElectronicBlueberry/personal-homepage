@@ -71,12 +71,12 @@
 
 	.gallery-image {
 		flex: calc(var(--aspect-ratio) * 10);
-		min-width: calc(var(--base-width) * var(--aspect-ratio));
+		min-width: min(100%, calc(var(--base-width) * var(--aspect-ratio)));
 		overflow: hidden;
 		position: relative;
 		
 		@include media-max-width(800px) {
-			min-width: calc(var(--base-width) * 0.8 * var(--aspect-ratio));
+			min-width: min(100%, calc(var(--base-width) * 0.8 * var(--aspect-ratio)));
 		}
 		
 		@include media-max-width(360px) {

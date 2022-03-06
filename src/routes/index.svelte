@@ -38,6 +38,7 @@
 	
 	interface Content {
 		about_me_content: string,
+		description: string,
 		social_links: Array<{
 			social_links_id: SocialLinkObject
 		}>,
@@ -54,6 +55,13 @@
 		project.color = "var(--color-pink)";
 	});
 </script>
+
+<svelte:head>
+	<title>
+		About Me - Laila Los
+	</title>
+	<meta name="description" content={ content.description }>
+</svelte:head>
 
 <div class="index">
 	<Heading color="var(--color-bright)"> <AboutMe /> </Heading>
@@ -137,6 +145,8 @@
 		align-items: center;
 		width: 100%;
 		
+		overflow: hidden;
+		
 		:global(.about-me) {
 			text-align: center;
 			max-width: 600px !important;
@@ -201,6 +211,12 @@
 		
 		a {
 			color: var(--color-pink);
+		}
+		
+		:global(.gallery) {
+			@include media-min-width(360px) {
+				width: min(calc(36% + 660px), calc(100% - 48px));
+			}
 		}
 	}
 </style>

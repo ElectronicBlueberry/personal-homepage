@@ -24,15 +24,12 @@
 		margin: 0 64px;
 		max-width: 1400px;
 		
-		@include media-max-width(1200px) {
-			margin: 0 24px;
-		}
-		
 		display: flex;
 		flex-wrap: wrap;
 		
 		@include media-max-width(360px) {
 			flex-direction: column;
+			width: calc(100% - 24px);
 		}
 	}
 </style>

@@ -72,6 +72,13 @@
 	}
 </script>
 
+<svelte:head>
+	<title>
+		{ galleryObject.title } - Laila Los
+	</title>
+	<meta name="description" content={ galleryObject.description }>
+</svelte:head>
+
 <a href="/gallery" class="gallery-link"> <Heading color="var(--color-bright)"> <Gallery /> </Heading> </a>
 
 <div class="img-viewer" style="--gallery-color: { galleryObject.color || "white" }">
