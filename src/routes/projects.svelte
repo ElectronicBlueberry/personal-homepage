@@ -1,0 +1,63 @@
+<script lang="ts" context="module">
+	import type { Load } from "@sveltejs/kit"
+	import type { ProjectObject } from "$models/projects"
+	
+	export const load: Load = async({ fetch }) => {
+		const p = "projects.projects_id";
+		const projectFields = `${p}.id,${p}.title,${p}.abstract,${p}.featured_image`;
+		
+		const url = `${ import.meta.env.VITE_DIRECTUS_URL }/items/projects_page?fields[]=*,${ projectFields }`;
+		
+		const res = await fetch(url);
+		const content = res.ok && (await res.json()).data;
+		
+		return {
+			props: {
+				text: content?.text,
+				projects: content?.projects.map(p => p.projects_id)
+			}
+		};
+	}
+</script>
+
+<script lang="ts">
+	import Heading from "$components/heading.svelte"
+	import ProjectPreview from "$components/projectPreview.svelte"
+	import Projects from "$svg/projects.svg"
+	
+	export let text: string;
+	export let projects: ProjectObject[];
+</script>
+
+<Heading color="var(--color-bright)"><Projects /></Heading>
+
+<div class="projects">
+	<div class="text">
+		{@html text}
+	</div>
+	{#each projects as project}
+		<ProjectPreview project={ project } />
+	{/each}
+</div>
+
+<style lang="scss">
+	@import "../scss/mixins";
+	
+	.projects {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding: 24px 0;
+		align-items: center;
+		
+		.text {
+			text-align: center;
+			max-width: 960px;
+			margin: 0 48px;
+			
+			@include media-max-width(380px) {
+				margin: 0 24px;
+			}
+		}
+	}
+</style>
