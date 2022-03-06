@@ -1,0 +1,8 @@
+node_modules
+npm-debug*
+.svelte-kit
+.github
+.idea
+.vscode
+README.md
+design_files
