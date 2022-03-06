@@ -1,0 +1,2669 @@
+version: 1
+directus: 9.5.2
+collections:
+  - collection: footer
+    meta:
+      collection: footer
+      icon: minimize
+      note: null
+      display_template: null
+      hidden: false
+      singleton: true
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: footer
+      sql: >-
+        CREATE TABLE `footer` (`id` integer not null primary key autoincrement,
+        `footer_text` varchar(255) null)
+  - collection: footer_social_links
+    meta:
+      collection: footer_social_links
+      icon: import_export
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: footer_social_links
+      sql: >-
+        CREATE TABLE "footer_social_links" (`id` integer PRIMARY KEY
+        AUTOINCREMENT NOT NULL, `footer_id` integer NULL, `social_links_id`
+        integer NULL, `order` integer NULL, CONSTRAINT
+        `footer_social_links_social_links_id_foreign` FOREIGN KEY
+        (`social_links_id`) REFERENCES `social_links` (`id`) ON DELETE SET NULL,
+        CONSTRAINT `footer_social_links_footer_id_foreign` FOREIGN KEY
+        (`footer_id`) REFERENCES `footer` (`id`) ON DELETE SET NULL)
+  - collection: galleries
+    meta:
+      collection: galleries
+      icon: filter
+      note: null
+      display_template: null
+      hidden: false
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: galleries
+      sql: >-
+        CREATE TABLE "galleries" (`id` integer PRIMARY KEY AUTOINCREMENT NOT
+        NULL, `title` varchar(255) NULL, `subtitle` varchar(255) NULL, `color`
+        varchar(255) null default null)
+  - collection: galleries_files
+    meta:
+      collection: galleries_files
+      icon: import_export
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: galleries_files
+      sql: >-
+        CREATE TABLE "galleries_files" (`id` integer PRIMARY KEY AUTOINCREMENT
+        NOT NULL, `galleries_id` integer NULL, `directus_files_id` char(36)
+        NULL, `order` integer NULL, CONSTRAINT
+        `galleries_files_directus_files_id_foreign` FOREIGN KEY
+        (`directus_files_id`) REFERENCES `directus_files` (`id`) ON DELETE SET
+        NULL, CONSTRAINT `galleries_files_galleries_id_foreign` FOREIGN KEY
+        (`galleries_id`) REFERENCES `galleries` (`id`) ON DELETE SET NULL)
+  - collection: gallery_page
+    meta:
+      collection: gallery_page
+      icon: grid_view
+      note: null
+      display_template: null
+      hidden: false
+      singleton: true
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: gallery_page
+      sql: >-
+        CREATE TABLE `gallery_page` (`id` integer not null primary key
+        autoincrement)
+  - collection: gallery_page_galleries
+    meta:
+      collection: gallery_page_galleries
+      icon: import_export
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: gallery_page_galleries
+      sql: >-
+        CREATE TABLE "gallery_page_galleries" (`id` integer PRIMARY KEY
+        AUTOINCREMENT NOT NULL, `gallery_page_id` integer NULL, `galleries_id`
+        integer NULL, `order` integer NULL, CONSTRAINT
+        `gallery_page_galleries_galleries_id_foreign` FOREIGN KEY
+        (`galleries_id`) REFERENCES `galleries` (`id`) ON DELETE SET NULL,
+        CONSTRAINT `gallery_page_galleries_gallery_page_id_foreign` FOREIGN KEY
+        (`gallery_page_id`) REFERENCES `gallery_page` (`id`) ON DELETE SET NULL)
+  - collection: homepage_content
+    meta:
+      collection: homepage_content
+      icon: article
+      note: Conent on the "About Me" page
+      display_template: null
+      hidden: false
+      singleton: true
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: 1
+      group: null
+      collapse: open
+    schema:
+      name: homepage_content
+      sql: >-
+        CREATE TABLE "homepage_content" (`id` integer PRIMARY KEY AUTOINCREMENT
+        NOT NULL, `about_me_content` text NULL, `featured_gallery` integer NULL,
+        CONSTRAINT `homepage_content_featured_gallery_foreign` FOREIGN KEY
+        (`featured_gallery`) REFERENCES `galleries` (`id`) ON DELETE SET NULL)
+  - collection: homepage_content_projects
+    meta:
+      collection: homepage_content_projects
+      icon: import_export
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: homepage_content_projects
+      sql: >-
+        CREATE TABLE "homepage_content_projects" (`id` integer PRIMARY KEY
+        AUTOINCREMENT NOT NULL, `homepage_content_id` integer NULL,
+        `projects_id` integer NULL, `order` integer NULL, CONSTRAINT
+        `homepage_content_projects_projects_id_foreign` FOREIGN KEY
+        (`projects_id`) REFERENCES `projects` (`id`) ON DELETE SET NULL,
+        CONSTRAINT `homepage_content_projects_homepage_content_id_foreign`
+        FOREIGN KEY (`homepage_content_id`) REFERENCES `homepage_content` (`id`)
+        ON DELETE SET NULL)
+  - collection: homepage_content_social_links
+    meta:
+      collection: homepage_content_social_links
+      icon: import_export
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: homepage_content_social_links
+      sql: >-
+        CREATE TABLE "homepage_content_social_links" (`id` integer PRIMARY KEY
+        AUTOINCREMENT NOT NULL, `homepage_content_id` integer NULL,
+        `social_links_id` integer NULL, `order` integer NULL, CONSTRAINT
+        `homepage_content_social_links_social_links_id_foreign` FOREIGN KEY
+        (`social_links_id`) REFERENCES `social_links` (`id`) ON DELETE SET NULL,
+        CONSTRAINT `homepage_content_social_links_homepage_content_id_foreign`
+        FOREIGN KEY (`homepage_content_id`) REFERENCES `homepage_content` (`id`)
+        ON DELETE SET NULL)
+  - collection: projects
+    meta:
+      collection: projects
+      icon: assignment
+      note: null
+      display_template: null
+      hidden: false
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: projects
+      sql: >-
+        CREATE TABLE "projects" (`id` integer PRIMARY KEY AUTOINCREMENT NOT
+        NULL, `title` varchar(255) NULL, `abstract` text NULL, `featured_image`
+        char(36) NULL, `color` varchar(255) NULL, CONSTRAINT
+        `projects_featured_image_foreign` FOREIGN KEY (`featured_image`)
+        REFERENCES `directus_files` (`id`) ON DELETE SET NULL)
+  - collection: projects_page
+    meta:
+      collection: projects_page
+      icon: wysiwyg
+      note: null
+      display_template: null
+      hidden: false
+      singleton: true
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: projects_page
+      sql: >-
+        CREATE TABLE `projects_page` (`id` integer not null primary key
+        autoincrement, `text` text null)
+  - collection: projects_page_projects
+    meta:
+      collection: projects_page_projects
+      icon: import_export
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: projects_page_projects
+      sql: >-
+        CREATE TABLE "projects_page_projects" (`id` integer PRIMARY KEY
+        AUTOINCREMENT NOT NULL, `projects_page_id` integer NULL, `projects_id`
+        integer NULL, `order` integer NULL, CONSTRAINT
+        `projects_page_projects_projects_id_foreign` FOREIGN KEY (`projects_id`)
+        REFERENCES `projects` (`id`) ON DELETE SET NULL, CONSTRAINT
+        `projects_page_projects_projects_page_id_foreign` FOREIGN KEY
+        (`projects_page_id`) REFERENCES `projects_page` (`id`) ON DELETE SET
+        NULL)
+  - collection: sections
+    meta:
+      collection: sections
+      icon: visibility_off
+      note: null
+      display_template: null
+      hidden: true
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: sections
+      sql: >-
+        CREATE TABLE "sections" (`id` integer PRIMARY KEY AUTOINCREMENT NOT
+        NULL, `text` text NULL, `article_id` varchar(255) NULL, CONSTRAINT
+        `sections_article_id_foreign` FOREIGN KEY (`article_id`) REFERENCES
+        `projects` (`id`) ON DELETE SET NULL)
+  - collection: social_links
+    meta:
+      collection: social_links
+      icon: link
+      note: null
+      display_template: null
+      hidden: false
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: social_links
+      sql: >-
+        CREATE TABLE "social_links" (`id` integer PRIMARY KEY AUTOINCREMENT NOT
+        NULL, `title` varchar(255) NULL, `url` varchar(255) NULL, `icon`
+        char(36) NULL, CONSTRAINT `social_links_icon_foreign` FOREIGN KEY
+        (`icon`) REFERENCES `directus_files` (`id`) ON DELETE SET NULL)
+fields:
+  - collection: galleries
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: galleries
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: 1
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries
+    field: title
+    type: string
+    schema:
+      name: title
+      table: galleries
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries
+      field: title
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 2
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries
+    field: subtitle
+    type: string
+    schema:
+      name: subtitle
+      table: galleries
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries
+      field: subtitle
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries
+    field: color
+    type: string
+    schema:
+      name: color
+      table: galleries
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries
+      field: color
+      special: null
+      interface: select-color
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries_files
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: galleries_files
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries_files
+      field: id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries_files
+    field: galleries_id
+    type: integer
+    schema:
+      name: galleries_id
+      table: galleries_files
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: galleries
+    meta:
+      collection: galleries_files
+      field: galleries_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries_files
+    field: directus_files_id
+    type: string
+    schema:
+      name: directus_files_id
+      table: galleries_files
+      data_type: char
+      default_value: null
+      max_length: 36
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: directus_files
+    meta:
+      collection: galleries_files
+      field: directus_files_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries_files
+    field: order
+    type: integer
+    schema:
+      name: order
+      table: galleries_files
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: galleries_files
+      field: order
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: gallery_page
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: gallery_page
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: social_links
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: social_links
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: social_links
+    field: title
+    type: string
+    schema:
+      name: title
+      table: social_links
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: social_links
+      field: title
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: social_links
+    field: url
+    type: string
+    schema:
+      name: url
+      table: social_links
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: social_links
+      field: url
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: social_links
+    field: icon
+    type: uuid
+    schema:
+      name: icon
+      table: social_links
+      data_type: char
+      default_value: null
+      max_length: 36
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: directus_files
+    meta:
+      collection: social_links
+      field: icon
+      special:
+        - file
+      interface: file
+      options:
+        folder: e54360de-6966-4750-b8a1-cdb09579cb36
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: footer
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: footer
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer
+    field: footer_text
+    type: string
+    schema:
+      name: footer_text
+      table: footer
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: footer
+      field: footer_text
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer_social_links
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: footer_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: footer_social_links
+      field: id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer_social_links
+    field: footer_id
+    type: integer
+    schema:
+      name: footer_id
+      table: footer_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: footer
+    meta:
+      collection: footer_social_links
+      field: footer_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer_social_links
+    field: social_links_id
+    type: integer
+    schema:
+      name: social_links_id
+      table: footer_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: social_links
+    meta:
+      collection: footer_social_links
+      field: social_links_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer_social_links
+    field: order
+    type: integer
+    schema:
+      name: order
+      table: footer_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: footer_social_links
+      field: order
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_social_links
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: homepage_content_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content_social_links
+      field: id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_social_links
+    field: homepage_content_id
+    type: integer
+    schema:
+      name: homepage_content_id
+      table: homepage_content_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: homepage_content
+    meta:
+      collection: homepage_content_social_links
+      field: homepage_content_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_social_links
+    field: social_links_id
+    type: integer
+    schema:
+      name: social_links_id
+      table: homepage_content_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: social_links
+    meta:
+      collection: homepage_content_social_links
+      field: social_links_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_social_links
+    field: order
+    type: integer
+    schema:
+      name: order
+      table: homepage_content_social_links
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content_social_links
+      field: order
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_projects
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: homepage_content_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content_projects
+      field: id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_projects
+    field: homepage_content_id
+    type: integer
+    schema:
+      name: homepage_content_id
+      table: homepage_content_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: homepage_content
+    meta:
+      collection: homepage_content_projects
+      field: homepage_content_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_projects
+    field: projects_id
+    type: integer
+    schema:
+      name: projects_id
+      table: homepage_content_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: projects
+    meta:
+      collection: homepage_content_projects
+      field: projects_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content_projects
+    field: order
+    type: integer
+    schema:
+      name: order
+      table: homepage_content_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content_projects
+      field: order
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: homepage_content
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content
+    field: about_me_content
+    type: text
+    schema:
+      name: about_me_content
+      table: homepage_content
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: homepage_content
+      field: about_me_content
+      special: null
+      interface: input-rich-text-html
+      options:
+        softLength: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content
+    field: featured_gallery
+    type: integer
+    schema:
+      name: featured_gallery
+      table: homepage_content
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: galleries
+    meta:
+      collection: homepage_content
+      field: featured_gallery
+      special:
+        - m2o
+      interface: select-dropdown-m2o
+      options:
+        template: '{{title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page_galleries
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: gallery_page_galleries
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: gallery_page_galleries
+      field: id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page_galleries
+    field: gallery_page_id
+    type: integer
+    schema:
+      name: gallery_page_id
+      table: gallery_page_galleries
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: gallery_page
+    meta:
+      collection: gallery_page_galleries
+      field: gallery_page_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page_galleries
+    field: galleries_id
+    type: integer
+    schema:
+      name: galleries_id
+      table: gallery_page_galleries
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: galleries
+    meta:
+      collection: gallery_page_galleries
+      field: galleries_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page_galleries
+    field: order
+    type: integer
+    schema:
+      name: order
+      table: gallery_page_galleries
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: gallery_page_galleries
+      field: order
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: directus_files
+    field: color
+    type: string
+    schema:
+      name: color
+      table: directus_files
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: directus_files
+      field: color
+      special: null
+      interface: select-color
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: projects_page
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects_page
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: 1
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page
+    field: text
+    type: text
+    schema:
+      name: text
+      table: projects_page
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects_page
+      field: text
+      special: null
+      interface: input-rich-text-html
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 2
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page_projects
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: projects_page_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects_page_projects
+      field: id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page_projects
+    field: projects_page_id
+    type: integer
+    schema:
+      name: projects_page_id
+      table: projects_page_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: projects_page
+    meta:
+      collection: projects_page_projects
+      field: projects_page_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page_projects
+    field: projects_id
+    type: integer
+    schema:
+      name: projects_id
+      table: projects_page_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: projects
+    meta:
+      collection: projects_page_projects
+      field: projects_id
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page_projects
+    field: order
+    type: integer
+    schema:
+      name: order
+      table: projects_page_projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects_page_projects
+      field: order
+      special: null
+      interface: null
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: projects
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: 1
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects
+    field: title
+    type: string
+    schema:
+      name: title
+      table: projects
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects
+      field: title
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 2
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects
+    field: abstract
+    type: text
+    schema:
+      name: abstract
+      table: projects
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects
+      field: abstract
+      special: null
+      interface: input-rich-text-html
+      options:
+        folder: c553f728-9abd-48d7-917c-53d239707b24
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 5
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects
+    field: featured_image
+    type: uuid
+    schema:
+      name: featured_image
+      table: projects
+      data_type: char
+      default_value: null
+      max_length: 36
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: directus_files
+    meta:
+      collection: projects
+      field: featured_image
+      special:
+        - file
+      interface: file-image
+      options:
+        folder: c553f728-9abd-48d7-917c-53d239707b24
+      display: image
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects
+    field: color
+    type: string
+    schema:
+      name: color
+      table: projects
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: projects
+      field: color
+      special: null
+      interface: select-color
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: sections
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: sections
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: true
+      has_auto_increment: true
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: sections
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: sections
+    field: text
+    type: text
+    schema:
+      name: text
+      table: sections
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: null
+      foreign_key_table: null
+    meta:
+      collection: sections
+      field: text
+      special: null
+      interface: input-rich-text-html
+      options:
+        folder: c553f728-9abd-48d7-917c-53d239707b24
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: sections
+    field: article_id
+    type: string
+    schema:
+      name: article_id
+      table: sections
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      generation_expression: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      foreign_key_column: id
+      foreign_key_table: projects
+    meta:
+      collection: sections
+      field: article_id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: galleries
+    field: images
+    type: alias
+    schema: null
+    meta:
+      collection: galleries
+      field: images
+      special:
+        - files
+      interface: files
+      options:
+        folder: b42db4f6-bc4a-405c-904f-4063cdd4fc23
+        template: '{{directus_files_id.$thumbnail}}{{directus_files_id.title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 5
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: gallery_page
+    field: galleries
+    type: alias
+    schema: null
+    meta:
+      collection: gallery_page
+      field: galleries
+      special:
+        - m2m
+      interface: list-m2m
+      options:
+        template: '{{galleries_id.title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: footer
+    field: social_links
+    type: alias
+    schema: null
+    meta:
+      collection: footer
+      field: social_links
+      special:
+        - m2m
+      interface: list-m2m
+      options:
+        template: '{{social_links_id.title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content
+    field: social_links
+    type: alias
+    schema: null
+    meta:
+      collection: homepage_content
+      field: social_links
+      special:
+        - m2m
+      interface: list-m2m
+      options:
+        template: '{{social_links_id.title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: homepage_content
+    field: featured_projects
+    type: alias
+    schema: null
+    meta:
+      collection: homepage_content
+      field: featured_projects
+      special:
+        - m2m
+      interface: list-m2m
+      options:
+        template: '{{projects_id.title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects_page
+    field: projects
+    type: alias
+    schema: null
+    meta:
+      collection: projects_page
+      field: projects
+      special:
+        - m2m
+      interface: list-m2m
+      options:
+        template: '{{projects_id.title}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: projects
+    field: article
+    type: alias
+    schema: null
+    meta:
+      collection: projects
+      field: article
+      special:
+        - o2m
+      interface: list-o2m
+      options:
+        template: '{{text}}'
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+relations:
+  - collection: galleries_files
+    field: galleries_id
+    related_collection: galleries
+    schema:
+      table: galleries_files
+      column: galleries_id
+      foreign_key_table: galleries
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: galleries_files
+      many_field: galleries_id
+      one_collection: galleries
+      one_field: images
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: directus_files_id
+      sort_field: order
+      one_deselect_action: nullify
+  - collection: galleries_files
+    field: directus_files_id
+    related_collection: directus_files
+    schema:
+      table: galleries_files
+      column: directus_files_id
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: galleries_files
+      many_field: directus_files_id
+      one_collection: directus_files
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: galleries_id
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: social_links
+    field: icon
+    related_collection: directus_files
+    schema:
+      table: social_links
+      column: icon
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: social_links
+      many_field: icon
+      one_collection: directus_files
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: null
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: footer_social_links
+    field: footer_id
+    related_collection: footer
+    schema:
+      table: footer_social_links
+      column: footer_id
+      foreign_key_table: footer
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: footer_social_links
+      many_field: footer_id
+      one_collection: footer
+      one_field: social_links
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: social_links_id
+      sort_field: order
+      one_deselect_action: nullify
+  - collection: footer_social_links
+    field: social_links_id
+    related_collection: social_links
+    schema:
+      table: footer_social_links
+      column: social_links_id
+      foreign_key_table: social_links
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: footer_social_links
+      many_field: social_links_id
+      one_collection: social_links
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: footer_id
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: homepage_content_social_links
+    field: homepage_content_id
+    related_collection: homepage_content
+    schema:
+      table: homepage_content_social_links
+      column: homepage_content_id
+      foreign_key_table: homepage_content
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: homepage_content_social_links
+      many_field: homepage_content_id
+      one_collection: homepage_content
+      one_field: social_links
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: social_links_id
+      sort_field: order
+      one_deselect_action: nullify
+  - collection: homepage_content_social_links
+    field: social_links_id
+    related_collection: social_links
+    schema:
+      table: homepage_content_social_links
+      column: social_links_id
+      foreign_key_table: social_links
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: homepage_content_social_links
+      many_field: social_links_id
+      one_collection: social_links
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: homepage_content_id
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: homepage_content_projects
+    field: homepage_content_id
+    related_collection: homepage_content
+    schema:
+      table: homepage_content_projects
+      column: homepage_content_id
+      foreign_key_table: homepage_content
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: homepage_content_projects
+      many_field: homepage_content_id
+      one_collection: homepage_content
+      one_field: featured_projects
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: projects_id
+      sort_field: order
+      one_deselect_action: nullify
+  - collection: homepage_content_projects
+    field: projects_id
+    related_collection: projects
+    schema:
+      table: homepage_content_projects
+      column: projects_id
+      foreign_key_table: projects
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: homepage_content_projects
+      many_field: projects_id
+      one_collection: projects
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: homepage_content_id
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: homepage_content
+    field: featured_gallery
+    related_collection: galleries
+    schema:
+      table: homepage_content
+      column: featured_gallery
+      foreign_key_table: galleries
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: homepage_content
+      many_field: featured_gallery
+      one_collection: galleries
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: null
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: gallery_page_galleries
+    field: gallery_page_id
+    related_collection: gallery_page
+    schema:
+      table: gallery_page_galleries
+      column: gallery_page_id
+      foreign_key_table: gallery_page
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: gallery_page_galleries
+      many_field: gallery_page_id
+      one_collection: gallery_page
+      one_field: galleries
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: galleries_id
+      sort_field: order
+      one_deselect_action: nullify
+  - collection: gallery_page_galleries
+    field: galleries_id
+    related_collection: galleries
+    schema:
+      table: gallery_page_galleries
+      column: galleries_id
+      foreign_key_table: galleries
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: gallery_page_galleries
+      many_field: galleries_id
+      one_collection: galleries
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: gallery_page_id
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: projects_page_projects
+    field: projects_page_id
+    related_collection: projects_page
+    schema:
+      table: projects_page_projects
+      column: projects_page_id
+      foreign_key_table: projects_page
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: projects_page_projects
+      many_field: projects_page_id
+      one_collection: projects_page
+      one_field: projects
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: projects_id
+      sort_field: order
+      one_deselect_action: nullify
+  - collection: projects_page_projects
+    field: projects_id
+    related_collection: projects
+    schema:
+      table: projects_page_projects
+      column: projects_id
+      foreign_key_table: projects
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: projects_page_projects
+      many_field: projects_id
+      one_collection: projects
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: projects_page_id
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: projects
+    field: featured_image
+    related_collection: directus_files
+    schema:
+      table: projects
+      column: featured_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: projects
+      many_field: featured_image
+      one_collection: directus_files
+      one_field: null
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: null
+      sort_field: null
+      one_deselect_action: nullify
+  - collection: sections
+    field: article_id
+    related_collection: projects
+    schema:
+      table: sections
+      column: article_id
+      foreign_key_table: projects
+      foreign_key_column: id
+      on_update: NO ACTION
+      on_delete: SET NULL
+      constraint_name: null
+    meta:
+      many_collection: sections
+      many_field: article_id
+      one_collection: projects
+      one_field: article
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: null
+      sort_field: null
+      one_deselect_action: nullify

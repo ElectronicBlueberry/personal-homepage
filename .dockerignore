@@ -6,3 +6,4 @@ npm-debug*
 .vscode
 README.md
 design_files
+directus-shema.yml
