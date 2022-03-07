@@ -10,7 +10,7 @@
 	
 	export const load: Load = async({ fetch }) => {
 		// global data urls
-		const footerUrl = `${ import.meta.env.VITE_DIRECTUS_URL }/items/footer?fields=*,social_links.social_links_id.*`;
+		const footerUrl = `${ import.meta.env.VITE_DIRECTUS_URL }/items/footer?fields[]=*,social_links.social_links_id.*`;
 		const socialIconsUrl = `${ import.meta.env.VITE_DIRECTUS_URL }/items/social_links?fields[]=icon`;
 		
 		// resolve fetch in parallel
