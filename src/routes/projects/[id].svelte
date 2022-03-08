@@ -93,7 +93,6 @@
 			:global(img) {
 				max-width: 100%;
 				align-self: center;
-				box-shadow: 0.5px 0.5px 6px rgba(1, 1, 17, 0.2);
 			}
 		}
 	}
