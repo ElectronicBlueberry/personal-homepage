@@ -80,5 +80,20 @@
 				left: -50%;
 			}
 		}
+		
+		:global(section) {
+			display: flex;
+			flex-direction: column;
+			
+			:global(*) {
+				margin: 0.33em 0;
+			}
+			
+			:global(img) {
+				max-width: 100%;
+				align-self: center;
+				box-shadow: 0.5px 0.5px 6px rgba(1, 1, 17, 0.2);
+			}
+		}
 	}
 </style>
