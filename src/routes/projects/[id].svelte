@@ -84,6 +84,7 @@
 		:global(section) {
 			display: flex;
 			flex-direction: column;
+			padding-bottom: 12px;
 			
 			:global(*) {
 				margin: 0.33em 0;
