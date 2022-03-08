@@ -90,6 +90,11 @@
 				margin: 0.33em 0;
 			}
 			
+			:global(p) {
+				display: flex;
+				flex-direction: column;
+			}
+			
 			:global(img) {
 				max-width: 100%;
 				align-self: center;
