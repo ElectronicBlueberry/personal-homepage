@@ -99,7 +99,7 @@
 <style lang="scss">
 	@import "../scss/mixins";
 	
-	@mixin background($color, $img) {
+	@mixin background($img) {
 		position: relative;
 		
 		&:before, &:after {
@@ -111,31 +111,30 @@
 			bottom: 0;
 			right: 0;
 			z-index: -2;
-			background-color: $color;
 			opacity: 50%;
 		}
 		
 		&:before {
-			mask: $img;
-			mask-repeat: repeat-y;
-			mask-position: calc(-300px + 8%) 0;
+			background-image: $img;
+			background-repeat: repeat-y;
+			background-position: calc(-300px + 8%) 0;
 		}
 		
 		&:after {
-			mask: $img;
-			mask-repeat: repeat-y;
-			mask-position: calc(300px + 92%) 100%;
+			background-image: $img;
+			background-repeat: repeat-y;
+			background-position: calc(300px + 92%) 100%;
 		}
 		
 		@include media-max-width(510px) {
 			&:before {
-				mask-position: -400% 0;
-				mask-size: 90%;
+				background-position: -400% 0;
+				background-size: 90%;
 			}
 			
 			&:after {
-				mask-position: 500% 0;
-				mask-size: 90%;
+				background-position: 500% 0;
+				background-size: 90%;
 			}
 		}
 	};
@@ -166,17 +165,17 @@
 			padding: 96px 0 128px 0;
 			position: relative;
 			
-			@include background(var(--color-pink), url("/img/bg/scribbles_about.png"));
+			@include background(url("/img/bg/scribbles_about.png"));
 		}
 		
 		.projects {
 			padding: 64px 0;
 			
-			@include background(var(--color-blue), url("/img/bg/scribbles_projects.png"));
+			@include background(url("/img/bg/scribbles_projects.png"));
 		}
 		
 		.pictures {
-			@include background(var(--color-teal), url("/img/bg/scribbles_pictures.png"));
+			@include background(url("/img/bg/scribbles_pictures.png"));
 		}
 		
 		.social-links {
