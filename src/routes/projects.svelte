@@ -1,12 +1,13 @@
 <script lang="ts" context="module">
 	import type { Load } from "@sveltejs/kit"
 	import type { ProjectObject } from "$models/projects"
+	import { apiUrl } from "$lib/api"
 	
 	export const load: Load = async({ fetch }) => {
 		const p = "projects.projects_id";
 		const projectFields = `${p}.id,${p}.title,${p}.abstract,${p}.featured_image`;
 		
-		const url = `${ import.meta.env.VITE_DIRECTUS_URL }/items/projects_page?fields[]=*,${ projectFields }`;
+		const url = `${ apiUrl }/items/projects_page?fields[]=*,${ projectFields }`;
 		
 		const res = await fetch(url);
 		const content = res.ok && (await res.json()).data;

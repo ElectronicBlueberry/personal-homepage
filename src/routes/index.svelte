@@ -3,6 +3,7 @@
 	import type { GalleryObject } from "$models/gallery"
 	import type { SocialLinkObject } from "$models/socials"
 	import type { ProjectObject } from "$models/projects"
+	import { apiUrl } from "$lib/api"
 	
 	export const load: Load = async ({ fetch }) => {
 		const galleryFields = "featured_gallery.*,featured_gallery.images.directus_files_id.*";
@@ -12,7 +13,7 @@
 		const projectFields = `${p}.id,${p}.title,${p}.abstract,${p}.featured_image`;
 		
 		const params = `?fields[]=*,${ galleryFields },${ socialLinksFields },${ projectFields }`;
-		const url = `${import.meta.env.VITE_DIRECTUS_URL}/items/homepage_content${ params }`;
+		const url = `${apiUrl}/items/homepage_content${ params }`;
 		const res = await fetch(url);
 		
 		const content = res.ok && (await res.json()).data;

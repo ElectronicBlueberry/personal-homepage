@@ -1,9 +1,10 @@
 <script lang="ts" context="module">
 	import type { Load } from "@sveltejs/kit"
 	import type { GalleryObject } from "$models/gallery"
+	import { apiUrl } from "$lib/api"
 	
 	export const load: Load = async({ fetch }) => {
-		const url = `${ import.meta.env.VITE_DIRECTUS_URL }/items/gallery_page?fields[]=*,galleries.galleries_id.*.directus_files_id.*`;
+		const url = `${ apiUrl }/items/gallery_page?fields[]=*,galleries.galleries_id.*.directus_files_id.*`;
 		
 		const res = await fetch(url);
 		const content = res.ok && (await res.json()).data;

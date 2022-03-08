@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { ImageObject } from "$models/gallery"
 	
+	import { apiUrl } from "$lib/api"
+	
 	export let imageObject: ImageObject;
 	
 	let customClass = "";
@@ -8,7 +10,7 @@
 	
 	let imageUrl = "";
 	$: {
-		imageUrl = `${ import.meta.env.VITE_DIRECTUS_URL }/assets/${ imageObject.id }?height=192&quality=75`;
+		imageUrl = `${ apiUrl }/assets/${ imageObject.id }?height=192&quality=75`;
 	}
 </script>
 

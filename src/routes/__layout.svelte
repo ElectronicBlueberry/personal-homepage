@@ -1,8 +1,9 @@
 <script lang="ts" context="module">
 	import type { Load } from "@sveltejs/kit"
+	import { apiUrl } from "$lib/api"
 	
 	async function getSocialIcon(id: string, fetchFunction: typeof fetch) {
-		const url = `${ import.meta.env.VITE_DIRECTUS_URL }/assets/${id}`;
+		const url = `${ apiUrl }/assets/${id}`;
 		const res = await fetchFunction(url);
 		
 		return {key: id, val: res.ok && (await res.text())};
@@ -10,8 +11,8 @@
 	
 	export const load: Load = async({ fetch }) => {
 		// global data urls
-		const footerUrl = `${ import.meta.env.VITE_DIRECTUS_URL }/items/footer?fields[]=*,social_links.social_links_id.*`;
-		const socialIconsUrl = `${ import.meta.env.VITE_DIRECTUS_URL }/items/social_links?fields[]=icon`;
+		const footerUrl = `${ apiUrl }/items/footer?fields[]=*,social_links.social_links_id.*`;
+		const socialIconsUrl = `${ apiUrl }/items/social_links?fields[]=icon`;
 		
 		// resolve fetch in parallel
 		const [ footerRes, socialIconsRes ] = await Promise.all([
