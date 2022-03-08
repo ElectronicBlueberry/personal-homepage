@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { ProjectObject } from "$models/projects"
 	
-	import { apiUrl } from "$lib/api"
 	import Section from "$components/section.svelte"
 	
 	export let project: ProjectObject;
@@ -9,7 +8,7 @@
 
 <div class="project-preview" style="{ project.color || 'var(--color-text)' }">
 	<Section color={ project.color || "var(--color-pink)" }>
-		<img class="featured-image" src="{ apiUrl }/assets/{ project.featured_image }" alt={ project.title } />
+		<img class="featured-image" src="{ import.meta.env.VITE_DIRECTUS_URL_PUBLIC }/assets/{ project.featured_image }" alt={ project.title } />
 		<h1 class="title">{ project.title }</h1>
 		<div class="abstract">
 			{@html project.abstract}

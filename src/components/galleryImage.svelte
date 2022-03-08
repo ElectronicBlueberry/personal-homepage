@@ -2,7 +2,6 @@
 	import type { ImageObject } from "$models/gallery"
 	
 	import { onMount } from "svelte"
-	import { apiUrl } from "$lib/api"
 	
 	export let imageObject: ImageObject;
 	export let index: number;
@@ -60,9 +59,10 @@
 
 <div class="gallery-image" style="--aspect-ratio: { aspectRatio }; --base-width: { baseWidth }px; --color: { imageObject.color || defaultColor }" bind:this={ element }>
 	<a href="/gallery/{ galleryId }?index={ index }" title={ imageObject.title }>
-		<img src="{ apiUrl }/assets/{ imageObject.id }?{ params }"
+		<img src="{ import.meta.env.VITE_DIRECTUS_URL_PUBLIC }/assets/{ imageObject.id }?{ params }"
 		     title={ imageObject.title }
-		     alt={ imageObject.description || imageObject.title }>
+		     alt={ imageObject.title }
+		     on:load={ checkSize }>
 		
 		<div class="overlay"></div>
 	</a>

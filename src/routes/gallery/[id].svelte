@@ -71,7 +71,17 @@
 		index -= 1;
 		updateIndexParam();
 	}
+	
+	function keyUp(e: KeyboardEvent) {
+		if (e.key === "ArrowLeft") {
+			prev();
+		} else if (e.key === "ArrowRight") {
+			next();
+		}
+	}
 </script>
+
+<svelte:window on:keyup={ keyUp }></svelte:window>
 
 <svelte:head>
 	<title>
@@ -184,8 +194,19 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			padding: 24px;
+			padding-top: 20px;
+			
+			@include media-max-width(420px) {
+				padding: 24px 12px;
+			}
+			
+			:global(h1), :global(h2), :global(h3), :global(h4) {
+				margin: 0.2em 0;
+			}
 			
 			:global(p) {
+				margin: 0.25em 0;
 				text-align: start;
 			}
 		}

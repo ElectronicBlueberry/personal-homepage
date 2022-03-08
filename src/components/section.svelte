@@ -47,5 +47,9 @@
 		:global(h1) {
 			margin-top: 0.5em;
 		}
+		
+		:global(a) {
+			color: var(--color-pink);
+		}
 	}
 </style>

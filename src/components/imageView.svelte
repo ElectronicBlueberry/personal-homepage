@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { ImageObject } from "$models/gallery"
 	
-	import { apiUrl } from "$lib/api"
-	
 	export let imageObject: ImageObject;
 	
 	let customClass = "";
@@ -10,9 +8,9 @@
 </script>
 
 <div class="image-view { customClass }" style="--color: { imageObject.color || 'white' };">
-	<img src="{ apiUrl }/assets/{ imageObject.id }"
+	<img src="{ import.meta.env.VITE_DIRECTUS_URL_PUBLIC }/assets/{ imageObject.id }"
 	     title={ imageObject.title }
-	     alt={ imageObject.description || imageObject.title }>
+	     alt={ imageObject.title }>
 </div>
 
 <style lang="scss">
