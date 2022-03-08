@@ -92,6 +92,10 @@
 			grid-area: a;
 			margin: 0;
 			
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			
 			& > :global(p) {
 				margin: 0;
 			}
