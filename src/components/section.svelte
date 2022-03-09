@@ -26,7 +26,7 @@
 		max-width: 960px;
 		
 		color: var(--color-font);
-		text-shadow: 0.1px 0.1px 2px rgba(0, 0, 0, 0.27);
+		text-shadow: 0.1px 0.1px 2px rgba(1, 1, 17, 0.2);
 		
 		&:after {
 			content: "";
