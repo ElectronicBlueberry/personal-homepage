@@ -55,5 +55,16 @@
 		:global(img) {
 			box-shadow: 0.5px 0.5px 6px rgba(1, 1, 17, 0.2);
 		}
+		
+		
+		:global(.images-small) {
+			display: grid;
+			gap: 12px;
+			grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			
+			:global(img) {
+				margin: 0 !important;
+			}
+		}
 	}
 </style>
