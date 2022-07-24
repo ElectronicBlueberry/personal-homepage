@@ -30,7 +30,7 @@
 	import Heading from "$components/heading.svelte"
 	import Section from "$components/section.svelte"
 	import Gallery from "$components/gallery.svelte"
-	import SocialLink from "$components/socialLink.svelte"
+	import IconLink from "$components/iconLink.svelte"
 	import ProjectPreview from "$components/projectPreview.svelte"
 	
 	import AboutMe from "$svg/about_me.svg"
@@ -72,7 +72,7 @@
 			{@html content?.about_me_content}
 			<div class="social-links">
 				{#each content.social_links.map(l => l.social_links_id) as social}
-					<SocialLink social={ social } size={ 38 }/>
+					<IconLink social={ social } size={ 38 }/>
 				{/each}
 			</div>
 		</Section>

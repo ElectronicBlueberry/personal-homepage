@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SocialLinkObject } from "$models/socials"
-	import SocialLink from "./socialLink.svelte";
+	import IconLink from "./iconLink.svelte";
 	
 	export let text: string;
 	export let socials: SocialLinkObject[];
@@ -12,7 +12,7 @@
 	
 		<div class="links">
 			{#each socials as social}
-				<SocialLink social={ social } />
+				<IconLink social={ social } />
 			{/each}
 		</div>
 	</div>
